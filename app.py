@@ -3,17 +3,17 @@ import time
 from gtts import gTTS
 import streamlit as st
 import speech_recognition as sr
-from googletrans import LANGUAGES, Translator
+from google_trans_new import google_translator
 
 # Initialize translator
-translator = Translator()
+translator = google_translator()
 language_mapping = {name: code for code, name in LANGUAGES.items()}
 
 def get_language_code(language_name):
     return language_mapping.get(language_name, language_name)
 
 def translator_function(spoken_text, from_language, to_language):
-    return translator.translate(spoken_text, src=from_language, dest=to_language)
+    return translator.translate(spoken_text, lang_src=from_language, lang_tgt=to_language)
 
 def text_to_voice_streamlit(text_data, to_language):
     tts = gTTS(text=text_data, lang=to_language, slow=False)
